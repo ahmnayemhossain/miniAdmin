@@ -1,10 +1,40 @@
 import { PageHeader } from "../components/layout/PageHeader";
 import { KPICard } from "../components/design-system/KPICard";
-import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "../components/ui/card";
 import { StatusBadge } from "../components/design-system/StatusBadge";
-import { FlaskConical, Trash2, Droplets, AlertTriangle, CheckCircle2, TrendingUp, Award } from "lucide-react";
-import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
-import { useAlertStore, useCertificateStore, useDateFilterStore } from "../store";
+import {
+  FlaskConical,
+  Trash2,
+  Droplets,
+  AlertTriangle,
+  CheckCircle2,
+  TrendingUp,
+  Award,
+} from "lucide-react";
+import {
+  LineChart,
+  Line,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  PieChart,
+  Pie,
+  Cell,
+} from "recharts";
+import {
+  useAlertStore,
+  useCertificateStore,
+  useDateFilterStore,
+} from "../store";
 import { DateFilter } from "../components/DateFilter";
 import { useEffect } from "react";
 
@@ -57,12 +87,12 @@ const complianceData: ComplianceData[] = [
 export function Dashboard() {
   // Use global alert store
   const { alerts, acknowledgeAlert } = useAlertStore();
-  
+
   // Get recent unacknowledged alerts
   const recentAlerts = alerts
-    .filter(a => !a.acknowledged)
+    .filter((a) => !a.acknowledged)
     .slice(0, 4)
-    .map(a => ({
+    .map((a) => ({
       id: a.id,
       title: a.title,
       status: a.status,
@@ -81,15 +111,13 @@ export function Dashboard() {
 
   return (
     <div>
-      <PageHeader 
-        title="Dashboard" 
-        description="Command center for environmental and chemical operations"
-      />
-      
+      <PageHeader title="Dashboard" />
+
       {/* Date Filter Section */}
       <div className="flex items-center justify-between mb-6">
         <div className="text-sm text-muted-foreground">
-          Showing data for: <span className="font-medium text-foreground">{dateRange.label}</span>
+          Showing data for:{" "}
+          <span className="font-medium text-foreground">{dateRange.label}</span>
         </div>
         <DateFilter />
       </div>
@@ -154,12 +182,12 @@ export function Dashboard() {
                 <XAxis dataKey="day" stroke="#6b7280" />
                 <YAxis stroke="#6b7280" />
                 <Tooltip />
-                <Line 
-                  type="monotone" 
-                  dataKey="usage" 
-                  stroke="#3b82f6" 
+                <Line
+                  type="monotone"
+                  dataKey="usage"
+                  stroke="#3b82f6"
                   strokeWidth={2}
-                  dot={{ fill: '#3b82f6' }}
+                  dot={{ fill: "#3b82f6" }}
                 />
               </LineChart>
             </ResponsiveContainer>
@@ -215,11 +243,7 @@ export function Dashboard() {
                 <XAxis dataKey="month" stroke="#6b7280" />
                 <YAxis stroke="#6b7280" />
                 <Tooltip />
-                <Bar 
-                  dataKey="score" 
-                  fill="#10b981"
-                  radius={[4, 4, 0, 0]}
-                />
+                <Bar dataKey="score" fill="#10b981" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </CardContent>
@@ -236,10 +260,17 @@ export function Dashboard() {
           <CardContent>
             <div className="space-y-4">
               {recentAlerts.map((alert) => (
-                <div key={alert.id} className="flex items-start justify-between p-3 bg-muted/50 dark:bg-muted rounded-lg">
+                <div
+                  key={alert.id}
+                  className="flex items-start justify-between p-3 bg-muted/50 dark:bg-muted rounded-lg"
+                >
                   <div className="flex-1">
-                    <p className="font-medium text-sm text-foreground">{alert.title}</p>
-                    <p className="text-xs text-muted-foreground mt-1">{alert.time}</p>
+                    <p className="font-medium text-sm text-foreground">
+                      {alert.title}
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      {alert.time}
+                    </p>
                   </div>
                   <StatusBadge status={alert.status}>
                     {alert.status}

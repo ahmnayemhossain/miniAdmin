@@ -1,8 +1,20 @@
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "./ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from "./ui/dialog";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
 import { useState } from "react";
 import { useChemicalStore } from "../store";
 import { toast } from "sonner";
@@ -12,9 +24,12 @@ interface AddChemicalDialogProps {
   onOpenChange: (open: boolean) => void;
 }
 
-export function AddChemicalDialog({ open, onOpenChange }: AddChemicalDialogProps) {
+export function AddChemicalDialog({
+  open,
+  onOpenChange,
+}: AddChemicalDialogProps) {
   const { addChemical } = useChemicalStore();
-  
+
   const [formData, setFormData] = useState({
     name: "",
     casNumber: "",
@@ -28,9 +43,14 @@ export function AddChemicalDialog({ open, onOpenChange }: AddChemicalDialogProps
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Validation
-    if (!formData.name || !formData.casNumber || !formData.supplier || !formData.location) {
+    if (
+      !formData.name ||
+      !formData.casNumber ||
+      !formData.supplier ||
+      !formData.location
+    ) {
       toast.error("Please fill in all required fields");
       return;
     }
@@ -56,7 +76,7 @@ export function AddChemicalDialog({ open, onOpenChange }: AddChemicalDialogProps
     });
 
     toast.success(`${formData.name} added successfully`);
-    
+
     // Reset form
     setFormData({
       name: "",
@@ -68,21 +88,7 @@ export function AddChemicalDialog({ open, onOpenChange }: AddChemicalDialogProps
       stockCurrent: "",
       stockMax: "",
     });
-    
-    onOpenChange(false);
-  };
 
-  const handleCancel = () => {
-    setFormData({
-      name: "",
-      casNumber: "",
-      supplier: "",
-      location: "",
-      hazardType: "flammable",
-      unit: "L",
-      stockCurrent: "",
-      stockMax: "",
-    });
     onOpenChange(false);
   };
 
@@ -92,7 +98,7 @@ export function AddChemicalDialog({ open, onOpenChange }: AddChemicalDialogProps
         <DialogHeader>
           <DialogTitle>Add New Chemical</DialogTitle>
         </DialogHeader>
-        
+
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
@@ -101,18 +107,22 @@ export function AddChemicalDialog({ open, onOpenChange }: AddChemicalDialogProps
                 id="name"
                 placeholder="e.g., Sulfuric Acid"
                 value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, name: e.target.value })
+                }
                 required
               />
             </div>
-            
+
             <div className="space-y-2">
               <Label htmlFor="casNumber">CAS Number *</Label>
               <Input
                 id="casNumber"
                 placeholder="e.g., 7664-93-9"
                 value={formData.casNumber}
-                onChange={(e) => setFormData({ ...formData, casNumber: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, casNumber: e.target.value })
+                }
                 required
               />
             </div>
@@ -125,18 +135,22 @@ export function AddChemicalDialog({ open, onOpenChange }: AddChemicalDialogProps
                 id="supplier"
                 placeholder="e.g., ChemSupply Co."
                 value={formData.supplier}
-                onChange={(e) => setFormData({ ...formData, supplier: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, supplier: e.target.value })
+                }
                 required
               />
             </div>
-            
+
             <div className="space-y-2">
               <Label htmlFor="location">Location *</Label>
               <Input
                 id="location"
                 placeholder="e.g., Storage A-12"
                 value={formData.location}
-                onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, location: e.target.value })
+                }
                 required
               />
             </div>
@@ -147,7 +161,9 @@ export function AddChemicalDialog({ open, onOpenChange }: AddChemicalDialogProps
               <Label htmlFor="hazardType">Hazard Type *</Label>
               <Select
                 value={formData.hazardType}
-                onValueChange={(value) => setFormData({ ...formData, hazardType: value as any })}
+                onValueChange={(value) =>
+                  setFormData({ ...formData, hazardType: value as any })
+                }
               >
                 <SelectTrigger id="hazardType">
                   <SelectValue />
@@ -160,12 +176,14 @@ export function AddChemicalDialog({ open, onOpenChange }: AddChemicalDialogProps
                 </SelectContent>
               </Select>
             </div>
-            
+
             <div className="space-y-2">
               <Label htmlFor="unit">Unit *</Label>
               <Select
                 value={formData.unit}
-                onValueChange={(value) => setFormData({ ...formData, unit: value })}
+                onValueChange={(value) =>
+                  setFormData({ ...formData, unit: value })
+                }
               >
                 <SelectTrigger id="unit">
                   <SelectValue />
@@ -189,11 +207,13 @@ export function AddChemicalDialog({ open, onOpenChange }: AddChemicalDialogProps
                 step="0.01"
                 placeholder="e.g., 150"
                 value={formData.stockCurrent}
-                onChange={(e) => setFormData({ ...formData, stockCurrent: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, stockCurrent: e.target.value })
+                }
                 required
               />
             </div>
-            
+
             <div className="space-y-2">
               <Label htmlFor="stockMax">Maximum Stock *</Label>
               <Input
@@ -202,7 +222,9 @@ export function AddChemicalDialog({ open, onOpenChange }: AddChemicalDialogProps
                 step="0.01"
                 placeholder="e.g., 500"
                 value={formData.stockMax}
-                onChange={(e) => setFormData({ ...formData, stockMax: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, stockMax: e.target.value })
+                }
                 required
               />
             </div>
@@ -212,9 +234,7 @@ export function AddChemicalDialog({ open, onOpenChange }: AddChemicalDialogProps
             <Button type="button" variant="outline" onClick={handleCancel}>
               Cancel
             </Button>
-            <Button type="submit">
-              Add Chemical
-            </Button>
+            <Button type="submit">Add Chemical</Button>
           </DialogFooter>
         </form>
       </DialogContent>
