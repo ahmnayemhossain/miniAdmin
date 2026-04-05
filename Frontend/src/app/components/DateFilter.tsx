@@ -1,17 +1,3 @@
-import { useState } from "react";
-import { Calendar, ChevronDown } from "lucide-react";
-import { Button } from "./ui/button";
-import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
-import { Calendar as CalendarComponent } from "./ui/calendar";
-import { format, subDays, subMonths, subYears, startOfWeek, endOfWeek, startOfMonth, endOfMonth, addDays } from "date-fns";
-import { cn } from "./ui/utils";
-import { useDateFilterStore } from "../store";
-import { toast } from "sonner";
-
-interface DateFilterProps {
-  className?: string;
-}
-
 const presetRanges = [
   {
     label: "Today",
@@ -87,33 +73,40 @@ const presetRanges = [
 export function DateFilter({ className }: DateFilterProps) {
   const { dateRange, setDateRange } = useDateFilterStore();
   const [isOpen, setIsOpen] = useState(false);
-  const [customFromDate, setCustomFromDate] = useState<Date | undefined>(dateRange.from);
-  const [customToDate, setCustomToDate] = useState<Date | undefined>(dateRange.to);
+  const [customFromDate, setCustomFromDate] = useState<Date | undefined>(
+    dateRange.from,
+  );
+  const [customToDate, setCustomToDate] = useState<Date | undefined>(
+    dateRange.to,
+  );
   const [showCustom, setShowCustom] = useState(false);
 
-  const handlePresetClick = (e: React.MouseEvent, preset: typeof presetRanges[0]) => {
+  const handlePresetClick = (
+    e: React.MouseEvent,
+    preset: (typeof presetRanges)[0],
+  ) => {
     e.preventDefault();
     e.stopPropagation();
-    
-    console.log('=== DATE FILTER CLICKED ===');
-    console.log('Preset:', preset.label);
-    
+
+    console.log("=== DATE FILTER CLICKED ===");
+    console.log("Preset:", preset.label);
+
     const range = preset.getValue();
-    console.log('Date range:', {
+    console.log("Date range:", {
       from: range.from,
       to: range.to,
-      label: preset.label
+      label: preset.label,
     });
-    
+
     setDateRange({
       from: range.from,
       to: range.to,
       label: preset.label,
     });
-    
-    console.log('Date range set successfully');
+
+    console.log("Date range set successfully");
     toast.success(`Date filter updated: ${preset.label}`);
-    
+
     setIsOpen(false);
     setShowCustom(false);
   };
@@ -121,19 +114,19 @@ export function DateFilter({ className }: DateFilterProps) {
   const handleCustomApply = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    
+
     if (customFromDate && customToDate) {
       const label = `${format(customFromDate, "MMM dd")} - ${format(customToDate, "MMM dd, yyyy")}`;
-      
-      console.log('=== CUSTOM DATE APPLIED ===');
-      console.log('Custom range:', { customFromDate, customToDate, label });
-      
+
+      console.log("=== CUSTOM DATE APPLIED ===");
+      console.log("Custom range:", { customFromDate, customToDate, label });
+
       setDateRange({
         from: customFromDate,
         to: customToDate,
         label,
       });
-      
+
       toast.success(`Date filter updated: ${label}`);
       setIsOpen(false);
       setShowCustom(false);
@@ -143,7 +136,7 @@ export function DateFilter({ className }: DateFilterProps) {
   const handleCustomCancel = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    
+
     setCustomFromDate(dateRange.from);
     setCustomToDate(dateRange.to);
     setShowCustom(false);
@@ -152,7 +145,7 @@ export function DateFilter({ className }: DateFilterProps) {
   const handleShowCustom = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    
+
     setShowCustom(true);
   };
 
@@ -163,7 +156,7 @@ export function DateFilter({ className }: DateFilterProps) {
           variant="outline"
           className={cn(
             "justify-start text-left font-normal w-[140px]",
-            className
+            className,
           )}
         >
           <Calendar className="mr-2 h-4 w-4 flex-shrink-0" />
@@ -184,7 +177,7 @@ export function DateFilter({ className }: DateFilterProps) {
                   "w-full px-3 py-2 text-sm rounded-md text-left transition-colors",
                   dateRange.label === preset.label
                     ? "bg-primary text-primary-foreground"
-                    : "hover:bg-accent hover:text-accent-foreground"
+                    : "hover:bg-accent hover:text-accent-foreground",
                 )}
                 onClick={(e) => handlePresetClick(e, preset)}
               >
@@ -204,10 +197,12 @@ export function DateFilter({ className }: DateFilterProps) {
         ) : (
           <div className="p-3 space-y-3">
             <div className="text-sm font-medium">Custom Date Range</div>
-            
+
             <div className="space-y-2">
               <div>
-                <label className="text-xs text-muted-foreground mb-1 block">From Date</label>
+                <label className="text-xs text-muted-foreground mb-1 block">
+                  From Date
+                </label>
                 <CalendarComponent
                   mode="single"
                   selected={customFromDate}
@@ -215,14 +210,18 @@ export function DateFilter({ className }: DateFilterProps) {
                   initialFocus
                 />
               </div>
-              
+
               <div>
-                <label className="text-xs text-muted-foreground mb-1 block">To Date</label>
+                <label className="text-xs text-muted-foreground mb-1 block">
+                  To Date
+                </label>
                 <CalendarComponent
                   mode="single"
                   selected={customToDate}
                   onSelect={setCustomToDate}
-                  disabled={(date) => customFromDate ? date < customFromDate : false}
+                  disabled={(date) =>
+                    customFromDate ? date < customFromDate : false
+                  }
                 />
               </div>
             </div>
