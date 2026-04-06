@@ -5,13 +5,7 @@
       <PageHeader title="Dashboard" />
 
       {/* Date Filter Section */}
-      <div className="flex items-center justify-between mb-6">
-        <div className="text-sm text-muted-foreground">
-          Showing data for:{" "}
-          <span className="font-medium text-foreground">{dateRange.label}</span>
-        </div>
-        <DateFilter />
-      </div>
+      
 
       {/* KPI Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
