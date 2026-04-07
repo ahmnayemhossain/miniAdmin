@@ -8,14 +8,7 @@
       
 
       
-        <KPICard
-          title="Compliance Score"
-          value="94%"
-          subtitle="Above target"
-          icon={CheckCircle2}
-          status="safe"
-          trend={{ value: 2, isPositive: true }}
-        />
+        
         <KPICard
           title="Water Usage"
           value="8,400L"
