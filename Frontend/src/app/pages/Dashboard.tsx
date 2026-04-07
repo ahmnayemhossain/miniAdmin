@@ -7,16 +7,7 @@
       {/* Date Filter Section */}
       
 
-      {/* KPI Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-        <KPICard
-          title="Active Chemicals"
-          value="247"
-          subtitle="12 need attention"
-          icon={FlaskConical}
-          status="safe"
-          trend={{ value: 5, isPositive: true }}
-        />
+      
         <KPICard
           title="Compliance Score"
           value="94%"
