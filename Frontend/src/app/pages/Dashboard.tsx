@@ -24,9 +24,10 @@
               <Droplets className="w-5 h-5 text-blue-600" />
               Water Usage Trend
             </CardTitle>
-            
+
           </CardHeader>
           <CardContent>
+            
             <ResponsiveContainer width="100%" height={250}>
               <LineChart data={waterUsageData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
