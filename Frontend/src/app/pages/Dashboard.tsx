@@ -8,15 +8,7 @@
       
 
       
-        
-        <KPICard
-          title="Water Usage"
-          value="8,400L"
-          subtitle="This week"
-          icon={Droplets}
-          status="warning"
-          trend={{ value: 12, isPositive: false }}
-        />
+    
         <KPICard
           title="Waste Generated"
           value="450kg"
