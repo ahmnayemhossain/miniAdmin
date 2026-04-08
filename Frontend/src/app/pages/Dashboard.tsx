@@ -9,14 +9,7 @@
 
       
     
-        <KPICard
-          title="Waste Generated"
-          value="450kg"
-          subtitle="This month"
-          icon={Trash2}
-          status="safe"
-          trend={{ value: 8, isPositive: true }}
-        />
+       
         <KPICard
           title="Certificates"
           value={certificates.length}
