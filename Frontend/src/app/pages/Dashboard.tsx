@@ -13,6 +13,9 @@
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
         {/* Water Usage Chart */}
+        
+ {/* Water Usage Chart */}
+  {/* Water Usage Chart */}
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
